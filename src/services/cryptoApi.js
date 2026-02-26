@@ -8,17 +8,26 @@ export const cryptoApi = createApi({
   endpoints: (builder) => ({
     getPrices: builder.query({
       query: () => ({
-        url: 'simple/price',
+        url: 'coins',
         params: {
-          ids: trackedCoins.join(','),
-          vs_currencies: 'usd',
+          limit: 100,
+          orderBy: 'marketCap',
+          orderDirection: 'desc',
         },
       }),
-      transformResponse: (response) =>
-        trackedCoins.map((id) => ({
-          id,
-          usd: response[id]?.usd ?? null,
-        })),
+      transformResponse: (response) => {
+        const coins = response?.data?.coins ?? []
+
+        return trackedCoins.map((slug) => {
+          const match = coins.find((coin) => coin.slug === slug)
+
+          return {
+            id: slug,
+            name: match?.name ?? slug,
+            usd: match ? Number(match.price) : null,
+          }
+        })
+      },
     }),
   }),
 })

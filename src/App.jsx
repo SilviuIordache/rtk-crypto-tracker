@@ -1,10 +1,6 @@
 import './App.css'
 import { useGetPricesQuery } from './services/cryptoApi'
 
-function formatCoinName(id) {
-  return id.charAt(0).toUpperCase() + id.slice(1)
-}
-
 function formatUsdPrice(value) {
   if (value === null) {
     return 'N/A'
@@ -36,7 +32,7 @@ function App() {
         <header className="header">
           <div>
             <h1>RTK Crypto Tracker</h1>
-            <p>Live prices from CoinGecko with RTK Query</p>
+            <p>Live prices from Coinranking with RTK Query</p>
           </div>
           <button type="button" onClick={refetch} disabled={isFetching}>
             {isFetching ? 'Refreshing...' : 'Refresh'}
@@ -54,7 +50,7 @@ function App() {
           <ul className="coin-list">
             {prices.map((coin) => (
               <li key={coin.id} className="coin-item">
-                <span>{formatCoinName(coin.id)}</span>
+                <span>{coin.name}</span>
                 <strong>{formatUsdPrice(coin.usd)}</strong>
               </li>
             ))}
