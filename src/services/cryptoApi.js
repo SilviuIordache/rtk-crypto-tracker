@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const trackedCoins = ['bitcoin', 'ethereum', 'solana']
+const trackedCoins = [
+  { id: 'bitcoin', symbol: 'BTC', fallbackName: 'Bitcoin' },
+  { id: 'ethereum', symbol: 'ETH', fallbackName: 'Ethereum' },
+  { id: 'solana', symbol: 'SOL', fallbackName: 'Solana' },
+]
 
 export const cryptoApi = createApi({
   reducerPath: 'cryptoApi',
@@ -18,12 +22,12 @@ export const cryptoApi = createApi({
       transformResponse: (response) => {
         const coins = response?.data?.coins ?? []
 
-        return trackedCoins.map((slug) => {
-          const match = coins.find((coin) => coin.slug === slug)
+        return trackedCoins.map((trackedCoin) => {
+          const match = coins.find((coin) => coin.symbol === trackedCoin.symbol)
 
           return {
-            id: slug,
-            name: match?.name ?? slug,
+            id: trackedCoin.id,
+            name: match?.name ?? trackedCoin.fallbackName,
             usd: match ? Number(match.price) : null,
           }
         })
