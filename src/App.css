@@ -61,6 +61,12 @@ button:disabled {
   color: #fca5a5;
 }
 
+.section-title {
+  margin: 1.25rem 0 0.75rem;
+  font-size: 1rem;
+  color: #cbd5e1;
+}
+
 .coin-list {
   list-style: none;
   margin: 0;
@@ -73,10 +79,20 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.8rem;
   border: 1px solid #334155;
   background: #111827;
   border-radius: 10px;
   padding: 0.8rem 0.95rem;
+}
+
+.coin-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .coin-meta {
@@ -91,4 +107,30 @@ button:disabled {
   height: 22px;
   object-fit: contain;
   flex-shrink: 0;
+}
+
+.watch-button {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  border-radius: 7px;
+}
+
+.watch-button.add {
+  background: #0f766e;
+  border-color: #115e59;
+  color: #ccfbf1;
+}
+
+.watch-button.add:hover:not(:disabled) {
+  background: #0d9488;
+}
+
+.watch-button.remove {
+  background: #7f1d1d;
+  border-color: #991b1b;
+  color: #fee2e2;
+}
+
+.watch-button.remove:hover:not(:disabled) {
+  background: #b91c1c;
 }

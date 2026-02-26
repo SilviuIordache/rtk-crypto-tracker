@@ -4,6 +4,10 @@ const trackedCoins = [
   { id: 'bitcoin', symbol: 'BTC', fallbackName: 'Bitcoin' },
   { id: 'ethereum', symbol: 'ETH', fallbackName: 'Ethereum' },
   { id: 'solana', symbol: 'SOL', fallbackName: 'Solana' },
+  { id: 'xrp', symbol: 'XRP', fallbackName: 'XRP' },
+  { id: 'dogecoin', symbol: 'DOGE', fallbackName: 'Dogecoin' },
+  { id: 'cardano', symbol: 'ADA', fallbackName: 'Cardano' },
+  { id: 'chainlink', symbol: 'LINK', fallbackName: 'Chainlink' },
 ]
 
 export const cryptoApi = createApi({
