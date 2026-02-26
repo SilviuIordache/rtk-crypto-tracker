@@ -28,6 +28,7 @@ export const cryptoApi = createApi({
           return {
             id: trackedCoin.id,
             name: match?.name ?? trackedCoin.fallbackName,
+            iconUrl: match?.iconUrl ?? null,
             usd: match ? Number(match.price) : null,
           }
         })

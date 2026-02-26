@@ -50,7 +50,17 @@ function App() {
           <ul className="coin-list">
             {prices.map((coin) => (
               <li key={coin.id} className="coin-item">
-                <span>{coin.name}</span>
+                <div className="coin-meta">
+                  {coin.iconUrl && (
+                    <img
+                      src={coin.iconUrl}
+                      alt={`${coin.name} icon`}
+                      className="coin-icon"
+                      loading="lazy"
+                    />
+                  )}
+                  <span>{coin.name}</span>
+                </div>
                 <strong>{formatUsdPrice(coin.usd)}</strong>
               </li>
             ))}
