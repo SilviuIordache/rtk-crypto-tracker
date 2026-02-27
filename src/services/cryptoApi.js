@@ -34,6 +34,7 @@ export const cryptoApi = createApi({
             name: match?.name ?? trackedCoin.fallbackName,
             iconUrl: match?.iconUrl ?? null,
             usd: match ? Number(match.price) : null,
+            change24h: match ? Number(match.change) : null,
           }
         })
       },
