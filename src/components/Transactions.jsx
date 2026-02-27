@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux'
+import { selectSortedPortfolioTransactions } from '../features/portfolio/selectors'
 import TransactionCard from './TransactionCard'
 
 function Transactions() {
-  const purchases = useSelector((state) => state.portfolio.purchases)
-  const sortedTransactions = [...purchases].sort(
-    (a, b) => new Date(b.purchasedAt).getTime() - new Date(a.purchasedAt).getTime(),
-  )
+  const transactions = useSelector(selectSortedPortfolioTransactions)
 
   return (
     <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5 shadow-xl shadow-slate-950/40">
@@ -14,16 +12,16 @@ function Transactions() {
           Transactions
         </h2>
         <p className="mt-1 text-xs text-slate-500">
-          {purchases.length} transaction{purchases.length === 1 ? '' : 's'}
+          {transactions.length} transaction{transactions.length === 1 ? '' : 's'}
         </p>
       </header>
 
-      {purchases.length === 0 ? (
+      {transactions.length === 0 ? (
         <p className="my-3 text-sm text-slate-400">No transactions yet.</p>
       ) : (
         <ul className="grid gap-2">
-          {sortedTransactions.map((purchase) => (
-            <TransactionCard key={purchase.id} purchase={purchase} />
+          {transactions.map((transaction) => (
+            <TransactionCard key={transaction.id} transaction={transaction} />
           ))}
         </ul>
       )}

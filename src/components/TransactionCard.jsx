@@ -1,51 +1,27 @@
-function formatUsd(value) {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 2,
-  }).format(value)
-}
+import { formatDate, formatQuantity, formatUsd } from '../utils/formatters'
 
-function formatQuantity(value) {
-  return new Intl.NumberFormat('en-US', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 8,
-  }).format(value)
-}
+function TransactionCard({ transaction }) {
+  const transactionDate = transaction.transactedAt ?? transaction.purchasedAt
 
-function formatDate(value) {
-  const date = new Date(value)
-
-  if (Number.isNaN(date.getTime())) {
-    return 'Unknown time'
-  }
-
-  return new Intl.DateTimeFormat('en-US', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-  }).format(date)
-}
-
-function TransactionCard({ purchase }) {
   return (
     <li className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-sm font-semibold text-slate-100">
-            {formatDate(purchase.purchasedAt)}
+            {formatDate(transactionDate)}
           </p>
-          <p className="mt-1 text-xs text-slate-400">{purchase.coinName}</p>
+          <p className="mt-1 text-xs text-slate-400">{transaction.coinName}</p>
           <p className="mt-0.5 text-[11px] uppercase tracking-wide text-slate-500">
             Transaction
           </p>
         </div>
         <p className="text-sm font-semibold text-slate-100">
-          {formatUsd(purchase.usdAmount)}
+          {formatUsd(transaction.usdAmount)}
         </p>
       </div>
       <div className="mt-2 flex items-center justify-between text-xs text-slate-400">
-        <span>Qty: {formatQuantity(purchase.quantity)}</span>
-        <span>Price: {formatUsd(purchase.priceUsd)}</span>
+        <span>Qty: {formatQuantity(transaction.quantity)}</span>
+        <span>Price: {formatUsd(transaction.priceUsd)}</span>
       </div>
     </li>
   )

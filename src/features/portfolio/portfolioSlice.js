@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  purchases: [],
+  transactions: [],
 }
 
 const portfolioSlice = createSlice({
@@ -10,7 +10,7 @@ const portfolioSlice = createSlice({
   reducers: {
     buyCoin: {
       reducer: (state, action) => {
-        state.purchases.push(action.payload)
+        state.transactions.push(action.payload)
       },
       prepare: ({ coinId, coinName, usdAmount, priceUsd, quantity }) => ({
         payload: {
@@ -22,7 +22,7 @@ const portfolioSlice = createSlice({
           usdAmount,
           priceUsd,
           quantity,
-          purchasedAt: new Date().toISOString(),
+          transactedAt: new Date().toISOString(),
         },
       }),
     },

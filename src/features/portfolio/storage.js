@@ -14,13 +14,19 @@ export function loadPortfolioState() {
 
     const parsedPortfolio = JSON.parse(serializedPortfolio)
 
-    if (!Array.isArray(parsedPortfolio?.purchases)) {
+    const rawTransactions = Array.isArray(parsedPortfolio?.transactions)
+      ? parsedPortfolio.transactions
+      : Array.isArray(parsedPortfolio?.purchases)
+        ? parsedPortfolio.purchases
+        : null
+
+    if (!rawTransactions) {
       return undefined
     }
 
     return {
       portfolio: {
-        purchases: parsedPortfolio.purchases,
+        transactions: rawTransactions,
       },
     }
   } catch {
@@ -36,7 +42,7 @@ export function savePortfolioState(portfolioState) {
   try {
     window.localStorage.setItem(
       PORTFOLIO_STORAGE_KEY,
-      JSON.stringify({ purchases: portfolioState.purchases }),
+      JSON.stringify({ transactions: portfolioState.transactions }),
     )
   } catch {
     // Ignore persistence errors to avoid breaking app behavior.
