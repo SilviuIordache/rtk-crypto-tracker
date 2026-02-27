@@ -1,4 +1,5 @@
 import CoinsList from './components/CoinsList'
+import CoinPortfolio from './components/CoinPortfolio'
 import WatchList from './components/WatchList'
 
 function App() {
@@ -20,7 +21,10 @@ function App() {
 
       <main className="mx-auto w-full max-w-7xl px-6 py-6">
         <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
-          <WatchList />
+          <div className="grid gap-6">
+            <WatchList />
+            <CoinPortfolio />
+          </div>
           <CoinsList />
         </div>
       </main>
