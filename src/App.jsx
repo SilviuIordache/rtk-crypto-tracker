@@ -25,7 +25,7 @@ function App() {
     isFetching,
     refetch,
   } = useGetPricesQuery(undefined, {
-    pollingInterval: 15000,
+    pollingInterval: 60 * 1000, // Refetch every 60 seconds
     refetchOnFocus: true,
     refetchOnReconnect: true,
   })
