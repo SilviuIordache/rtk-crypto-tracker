@@ -1,6 +1,6 @@
 import CoinsList from './components/CoinsList'
 import CoinPortfolio from './components/CoinPortfolio'
-import Purchases from './components/Purchases'
+import Transactions from './components/Transactions'
 import WatchList from './components/WatchList'
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <div className="grid gap-6">
             <WatchList />
             <CoinPortfolio />
-            <Purchases />
+            <Transactions />
           </div>
           <CoinsList />
         </div>
