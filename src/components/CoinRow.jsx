@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { Bookmark, ShoppingCart } from 'lucide-react'
+
 function formatUsdPrice(value) {
   if (value === null) {
     return 'N/A'
@@ -37,10 +40,10 @@ function getChangeClass(value) {
 
 function getWatchButtonClass(isWatched) {
   if (isWatched) {
-    return 'border-red-700 bg-red-900/80 text-red-100 hover:bg-red-700'
+    return 'border-amber-500/50 bg-amber-500/15 text-amber-300 hover:bg-amber-500/25'
   }
 
-  return 'border-teal-700 bg-teal-800 text-teal-100 hover:bg-teal-700'
+  return 'border-slate-600 bg-slate-800 text-slate-300 hover:bg-slate-700'
 }
 
 function CoinRow({ coin, isWatched, onToggle }) {
@@ -84,17 +87,25 @@ function CoinRow({ coin, isWatched, onToggle }) {
         <div className="flex items-center gap-2">
           <button
             type="button"
-            className="rounded-md border border-indigo-700 bg-indigo-800 px-2.5 py-1.5 text-xs font-semibold text-indigo-100 transition-colors hover:bg-indigo-700"
+            aria-label={`Buy ${coin.name}`}
+            title={`Buy ${coin.name}`}
+            className="grid h-8 w-8 place-items-center rounded-md border border-slate-600 bg-slate-800 text-slate-300 transition-colors hover:bg-slate-700"
             onClick={() => setIsBuyModalOpen(true)}
           >
-            Buy
+            <ShoppingCart size={16} strokeWidth={2} />
           </button>
           <button
             type="button"
-            className={`rounded-md border px-2.5 py-1.5 text-xs font-semibold transition-colors ${getWatchButtonClass(isWatched)}`}
+            aria-label={isWatched ? 'Remove from watchlist' : 'Add to watchlist'}
+            title={isWatched ? 'Remove from watchlist' : 'Add to watchlist'}
+            className={`grid h-8 w-8 place-items-center rounded-md border transition-colors ${getWatchButtonClass(isWatched)}`}
             onClick={onToggle}
           >
-            {isWatched ? 'Remove' : 'Add'}
+            <Bookmark
+              size={16}
+              strokeWidth={2}
+              className={isWatched ? 'fill-current' : undefined}
+            />
           </button>
         </div>
       </li>
@@ -145,4 +156,3 @@ function CoinRow({ coin, isWatched, onToggle }) {
 }
 
 export default CoinRow
-import { useState } from 'react'
