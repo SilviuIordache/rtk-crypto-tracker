@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Bookmark, ShoppingCart } from 'lucide-react'
+import { useDispatch } from 'react-redux'
+import { buyCoin } from '../features/portfolio/portfolioSlice'
 
 function formatUsdPrice(value) {
   if (value === null) {
@@ -47,6 +49,7 @@ function getWatchButtonClass(isWatched) {
 }
 
 function CoinRow({ coin, isWatched, onToggle }) {
+  const dispatch = useDispatch()
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false)
   const [usdAmount, setUsdAmount] = useState('')
 
@@ -57,6 +60,27 @@ function CoinRow({ coin, isWatched, onToggle }) {
 
   const handleBuy = (event) => {
     event.preventDefault()
+    const parsedUsdAmount = Number(usdAmount)
+
+    if (
+      Number.isNaN(parsedUsdAmount) ||
+      parsedUsdAmount <= 0 ||
+      coin.usd === null ||
+      coin.usd <= 0
+    ) {
+      return
+    }
+
+    dispatch(
+      buyCoin({
+        coinId: coin.id,
+        coinName: coin.name,
+        usdAmount: parsedUsdAmount,
+        priceUsd: coin.usd,
+        quantity: parsedUsdAmount / coin.usd,
+      }),
+    )
+
     closeBuyModal()
   }
 
