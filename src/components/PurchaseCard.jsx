@@ -31,9 +31,12 @@ function PurchaseCard({ purchase }) {
     <li className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-3">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-semibold text-slate-100">{purchase.coinName}</p>
-          <p className="mt-1 text-xs text-slate-400">
+          <p className="text-sm font-semibold text-slate-100">
             {formatDate(purchase.purchasedAt)}
+          </p>
+          <p className="mt-1 text-xs text-slate-400">{purchase.coinName}</p>
+          <p className="mt-0.5 text-[11px] uppercase tracking-wide text-slate-500">
+            Purchase
           </p>
         </div>
         <p className="text-sm font-semibold text-slate-100">
